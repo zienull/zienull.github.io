@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="XiEn with the cutiest Zronull">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://xirka.us/baka-diary/251116/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="251116 哇，金色传说">
+<meta property="og:url" content="https://xirka.us/baka-diary/251116/index.html">
+<meta property="og:site_name" content="和最喜欢的哥哥建立的龙巢！">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xirka.us/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-11-16T15:59:59.000Z">
+<meta property="article:modified_time" content="2025-11-23T10:05:52.776Z">
+<meta property="article:author" content="XiEn">
+<meta property="article:tag" content="baka-diary">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xirka.us/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            251116 哇，金色传说 | 和最喜欢的哥哥建立的龙巢！
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"xirka.us","root":"/","language":"zh-CN"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"这是 Home Banner","subtitle":{"text":["subtitle1","subtitle2","这里也可以用一言的只不过还没有配置","春季魅魔哥哥 已出现在龙穴","夏季魅魔哥哥 已出现在龙穴","秋季魅魔哥哥 已出现在龙穴","秋季奶龙（？）哥哥 已出现在龙穴","冬季魅魔哥哥 已出现在龙穴"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Friends":{"icon":"fa-solid fa-link","path":"/links/"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"Aha!","show_on_mobile":true,"links":{"笨蛋日记":{"path":"/categories/baka-diary","icon":"fa-regular fa-folder"},"不笨蛋日记":{"path":"/categories/diary-baka","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2025/07/09 01:12:00"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                和最喜欢的哥哥建立的龙巢！
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links/"
+                                        >
+                                    <i class="fa-solid fa-link fa-fw"></i>
+                                    友情链接
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links/"
+                        >
+                            <span>
+                                友情链接
+                            </span>
+                            
+                                <i class="fa-solid fa-link fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories/baka-diary"
+                        >
+                            <span>笨蛋日记</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories/diary-baka"
+                        >
+                            <span>不笨蛋日记</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">251116 哇，金色传说</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="/images/avatar/xien-1.webp">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">XiEn</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-11-16 23:59:59</span>
+        <span class="mobile">2025-11-16 23:59:59</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-11-23 18:05:52</span>
+            <span class="mobile">2025-11-23 18:05:52</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/baka-diary/">baka-diary</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/baka-diary/">baka-diary</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			
+<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Nope，不是这个" data-whm="喔，好像出了点问题！这个文章不能被校验, 不过你还是能看看解密后的内容">
+  <script id="hbeData" type="hbeData" data-hmacdigest="b1c2a96c693406d5e832bfe7bead6a8a065a5aae2c89106667d91a9be039f194">282d3661a0b162c684c02adbfd4ac5d2461c054991cf95310a4e7f5fb21045fb615567c6207e70e9142970e247704c696cf12e432f15f86b1b5e47d06eca8aa54d5d28f519fa82070c7a79766db074d10d7a8aaaa602a8b20f4ae8dc64c4701e1de71df4dcfdf691559a43697ca860ee868403411b7633ec781bfc4b820493f4346cfb9f10580754aca7b55e82462e4a79f1dd2ee27151d837c5fe6e6c6c841142c28335f676f42987b193cc1fea7f7091d753eaa4ee632b03c1fbdcebd88989a641c0e566203570c6fc066aedbf4cd4327d3dbc96ec0a32a55ee591fb15bca2fdda398d41b5061e2bab4936ae831a2208fb8d949f24a5241a9f86bccfb74d2a699029a564870d5af5b6605eb32f4fb3030893f44828ad880125ab1ff045e611094965ce4b3cf9170cbaa82fa344acace4f2bafb32987f3b6e9e25afa6d5723db115d603f0e64a208d8b6caa645b4d1742ec8bf5f246abdee7e13709ac22aa2667d5735f366dea7ef3e60e774a36f6ed7655d750ebef38658666e7d218fc8a11a15f2bdb8ef53a94efee40390af0bc2e2d6a366ca068677599fd053624a03e89692eae680a591f42bb1d92d0f085452270ee0699fb6d67814b058ef0d687cba701951f76ae3514d7ca9142b832cc9f882d118d054fc94a28e1c2b3f9f1e2abed1d1924ddf6fe2d90cdb7d7272969e0e7a9f3d06ad11b929635a936044c927444f559373bc9004d560f4d4e5d919f8e16e08b37c99fa74cd9c7f0e1bbebf82a2086aebc401ef8ae41ee87b39838c9d360db3f147a07865d7f4e9d7418087a2c289d77eaf93dcaa9ec6ea6bd7a87d6f84e6837ba67190eb3fe3969e106b8c1f1862a2cb8f7263d96f7e1498123c789bd885dbcb84d86ac1035792be1637350658f7fed2b0e5e180ccf877992d5d12f229a62e8cf2d237104c276ce454c50e2836862ef525a2d9c56f6ce753c459ad36c9bcc8dcf4fd9fda74353847f10553d6abd8112483f45c16eb6a7c55b00411bd566d15488d6d081f255d6f9130886aeca14b46792e3c35975bf756d71524467c5e6a60ffb36f6d6168c1554a27a081d573afced8429c48423229f24e885316f3d193d8415fb20fe4e5276c50d0d44ab55c5a2af9bdde360612c45a008c4d74c7604cdfefa9c878c2f43b7473bf777d22b38464d16f8ad2d8878f2273750eabd5a067f6c791c14fb8d09984d9f797ff13f358954b374abf8f86fdd1eead05df7fdfa509a905ef0103c7672799f12ac97ecd6aff363261f71219e8454cdfb56e8d738b92240ff4491d894e1e113dd85686b306e2166d449a769750aeca53c98ee94221be9aa89148a2b8bc0869f1f1e9b6078be4429ca8b5b9a70f2d895902aebd0e78921909b69a52c8449b97a9f5bd9e5b533e5c2a044503350df3a4efc9598dd0d9428042d493c184c86e50cd064e0b1277623707a6abbf11ef3300ebde532d2d3d8e592ffa34db61ca0f099ec2af6e1a8b4ccd5ae5470c4ac1b8c89211e54b8dab82d0dd04f93924aff66090bf67ecc70e6f9efd8b140244f7b0bf01f545b4b31453348c2cbb5cad9c0f0efbf65e081c51cca31b327d2441bac377146b034b48bb9f82df875b35f228815ba56898f81702652f8924098835a61f726ec08052c22ca87a564fa1983b71104a7812952fbea600f9001a1b00e43ba0fa906ce1edb77c1d90d3882958df4ab642152f6814a0667658b0cdc753febf5bb2ca0f82b2a768f437165152beb89df40cef8e23956acdf17c66af529b10f1d771c5894730c3e4ec0df31dd29e01c867fb3fa5a4b56d7863c48981c1a88c66863b923c9d6ce3243df7b574185abf71dfc86a0f68e7d38c59a13025a85efe3cb189fe4b5cfcc73e3ff4480c963b022b2900ba17a4088255f2419f93013c3cd4b76103b5726352653aab7ae535e52e3689df864f8991db13ef955b8a24233a672ac7894f8ddfd7f73d26834586dc77ca664278a697538b488d5facba2b25632678d378e9b0530a4b589f48a1f6b9832fd74c844c2331ca607d82bdc1a687899251a22b1ff4bad60fb4a9052b9f346e3df2fb4e2d5d2c602d88a6636f26b217421723ef1072580b841296d43be8a4727241210d63aa550b9a679acf535dba0bbd787dd5f281f8c087a232ffce471a364100cd3ca1d6b5b9890a952d61bbb9d8c83ad0e395bd172107c95441ee5116434ab138e991edc9db6ea486583f1d5e0d18e8788f7e1536f4209ab538f9e343117ed320764a18b7584fad075989bccd3e1a625370232c982ec1b71cc72a2e2ae69294cf15240026466a7c9bafc5029ea5a536c72d49fb663180438acb39c1be86b7778b8d1e418a4c2c934b7d6c3b96f57439fce4988c7d587c59ed88a2e0616f3f8a3283e3a62aa4eeaf9fd1bf3c41f326ac46d9005327233436a60dc4e5044f3edce85c6bebe73e2f2212fe048655ca89bc068aa5e07aab0cb4362cc947a10907e671ae428f3c136a8dcc5f674e7efc2e730d90a03be7972bd74fb6c501d8c34ebc85888bc64c468134e86a247c05acb92cb9e306df972b34d402eed1363bf40ff4c665f55f41ab8f1fcec64b0c368080e052e67aef2f737775ef5a6a5a5308379006c2d248cd505d362191b9887d479635bc8728923ee40dd947c67c31796a5cb04da9e7e2d442fcb662355671d7cd9dfdb5be6695ea9e4f9c3e07780b2a637a7125dd51fbba06aa69e9df4f990e265393e9165df0821dba71e53996df5a3c519d75eaddade66c7cdd4ad9c07f525e5f7bfec29c412f421219a32f00b56e98ab6e2f2ae7c9232a669b9c8c232ec10f7237969da683c18085a18497801be24420ffc4ccc555705b5dfc17e0a5de4a81741589e12d72e8fe8d39b1915d6b00afc00d4bda9132bf21fd355abc01b9056085673cb9debc73aa5c4bb2397586f553d350fe2f6998f425e57104f30d578963c1e4047a2245b2a8e94504e6ee02c2a37322b23857ac21f8d8cfeff88e4480cde9ff18810b9c14ae9674953df2453e57aef1717b73509ff6a9a90d825ea6f7e167e2591a567ebc1e81b8f7d06e10857918b9c3a433d0444fa4dd05fdbc9eeea0ed18685c6424b93e7d280df56fc765da3caf0a6e07a634907e6b1a4dd333c249caf5e9010246ce858ad3a54835ba4934bbcb90ffbe9cf395f029d8022198f7fde611bb863744f1419ea51f0ee7ea38a5b22acf267d300280205932407754aa67ab461a9f27ff6d0a7563a6a45f9fc331d9755b022cdb850c8e059368ed93f08f8bf1be934e6fa5b92f9b0df24dd391db2f44f42e7e570555b59fb1f19483069517ef81a96ba036dfba68741a9dd45fef33aba571ddbf3ad03bad854ea499fc051ed520832116365467d7c2515e435e66c2d5af734e109401dbfe1e57d299b76ad831f98272e0297dc67adf43fcf2f34a5febe2ad59b045ea71822eb0c901840a510847a47a20095ccab2e8fd432c4ded321fd2bfc690a1eaf9cff00d7e701255adcf78b054dff733402253d114c8dc1a05c1c27f0f28e48213dff122b0f762355d02232acc6b004081d17e42e3cbc669f85a8b25d5c31bfca6ee753cdbef496ad79da539eecbcc4b1a7aa4673e11af57007cfff6ba166ffd29a36f48a6b10b1151aebd91d0f62bb42bdfbb56cb03832e972f246778ccde68cd2a55898daf18e4653c0b0a6052177b3486f3a57e653f0b5354d1df47b9e3cd483bd6abfe844d15c359185d0c1f90ca7002cb70634fbca2f1928bcfc4960e695aeb132dcd949774434388d2f6d0f25224fb0eefb5f72d3d2a7eb97d9892568c44f751be5480612ffba529bb348f63bbb96346152b32f1d56935712ed1e8b38e1bb4a6612e8ce6034f517bea0267561ed9062d8b973d770a22be57b198e11fbb57aadfc9e193855566e9b3c3c47ce2d5d9c206e19b0e67ff269591a0c3520454c223a8e4d800e114530a2683224f13ef2967c201b220fc73de75883643c5e2c190a307e5edacb815f571a724bc02439f1d95885269c0af94f2214c92c81b68882ab813352c104fd7c9136f6d58fd8a87c50e3f9f6c60df91229d6caf2060c3ac00d1e2c7e892adc4cc9863e9a0b72d357b9b53d08f5b28f266f99d81b5e2420c8f70960b6ff310efa1bbccfd6283f6c53a27e28a91139f8fd463f6780deb2832cc9d3913a9cf88351c2468d58bca235ab13505ba14c7a443cab20a5981eaff98a2a7f485a76687bc03c8e07653463e6c7fa36d277b019aa4ad51d4e25df3fc84044ebb617f2a5a48696c4f38f753b6cb12a7fab4f760928c1b815ae5c7ab65111e0f33ca23203331e47c289f7a7f4309da2103dc6aaabf5e1936a68d296a6a6ae0cb6a8ca3281f763a2e63fca6b44803818ba6ea73dc538c0f572dad4f93e19d8f486a88c57ca35caee66a6e0c9fb340fbe8665f16d91b0b48ea2c830055cba936d1903aea3a0d1fdda4b100053228f3e06ff3aba2e70f5d8feaa605f36eda7d1131049673e0c0db5731a83a68c3b076d2689c1a7203bad2c8d74c8d132e8148ba8338d20542751a3d38f771c31c576985fce34ffed3d1a94fbd44f5722aabe8d153f39a74762ac29f91003a76e80f82256c2988a992258d442308694e9c1b9d91f81db4313bdaeb6518fc54a78a4bfa61ecb7917ee149f37d81466c574075ce4ea4a1fb7b1cbaed0b0e1044e733c48404f73856f8fa1b045061de28bdf761913f15b12e195829034f9a1b77174523f3106dd6b363bd8228b55afecaf6cfc922b5e6e6cb652bd4ee029590dfde721a481c0be6e10d5ada0e664ae5c58fe224ed67f26a2e8b97604183d305d788dc3f49ab51abe72ddc2b69c1433d2489cbe24c70c0d4fc8d44addc851d7163e04de18944989fb357e9014a7ed50415ad413b5a3405293522955e77432396819cc05981cee532a3a3fc6676de0fa8c5a35648f818e95227b37b5ab0dd8f132165ec683183130687552770aa1d3251d5fc03b6d5c2a2eb3a00d67208bb1d8f50ef880da347a4e345402fe05e266b7b9e417b3369bf5dbed9965c54841186b4b3b5c8dfc87885b8bf5af6abf97224c763e1326de80f4552c815f6e53b44bede370779a144d2f282600d969217d2d41a34073ecc813014b96c07ce56d45f69592806484d646fb757633d9711bb7189198cb94228a8a39050fc8ff68e937d281f5874e9c213cbb4fae897a5188b2236e8387ef57eb2ab0de9fa8fb806a5333de3df3e4d8feae0db417d6614294282432aadf26564c23cbbd9e4e5a3e53cc4b1e28efae3b8b2d742be526c71b4ade34b1157cdf2e043fd7e75c6ca827f0aa1bc15882911493411d5c58ffd8062b30b85fd9f6398eb41deba372e6f3a311a510443d92e41f8f75aa5dca580c43edda55917548074171b5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">没有密码不给看！</span>
+      </label>
+    </div>
+  </div>
+</div>
+<link href="/css/hbe.style.css" rel="stylesheet" type="text/css"><script data-swup-reload-script type="module" src="/js/plugins/hbe.js"></script>
+<script data-swup-reload-script type="module">
+import {initHBE} from "/js/plugins/hbe.js";
+  console.log("hexo-blog-encrypt: loaded.");
+    initHBE();
+</script>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 251116 哇，金色传说</li>
+        <li><strong>作者:</strong> XiEn</li>
+        <li><strong>创建于
+                :</strong> 2025-11-16 23:59:59</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-11-23 18:05:52
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://xirka.us/baka-diary/251116/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/baka-diary/">#baka-diary</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">251116 哇，金色传说</div>
+		
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2025</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">XiEn with the cutiest Zronull</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 4 篇文章
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
